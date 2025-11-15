@@ -1,60 +1,72 @@
-🚴‍♂️ Projet Vélib' Paris : Planificateur de Route en Temps Réel
-Ce projet est une application web minimaliste et gratuite, développée avec Python et Flask, qui permet aux utilisateurs de visualiser en temps réel l'état des stations Vélib' à Paris et de planifier des itinéraires cyclables précis.
+# 🚴‍♂️ Projet Vélib' Paris : Planificateur de Route en Temps Réel
 
-✨ Fonctionnalités
-Visualisation en Temps Réel : Les marqueurs de stations sont colorés selon la disponibilité des vélos (Vert pour disponible, Rouge pour vide).
+Ce projet est une application web minimaliste et gratuite, développée avec **Python** et **Flask**, qui permet aux utilisateurs de visualiser en temps réel l'état des stations Vélib' à Paris et de planifier des itinéraires cyclables précis.
 
-Planification d'Itinéraire (Routage Cyclable) : Utilisation de l'API OSRM (Open Source Routing Machine) pour tracer des chemins précis qui suivent les routes cyclables réelles.
+---
 
-Informations de Navigation : Affiche la distance totale, la durée estimée du trajet, et des instructions détaillées étape par étape.
+## 📑 Table des Matières
 
-Interface Simple : Une barre latérale fixe gère la sélection des stations de départ et d'arrivée.
+1.  [Fonctionnalités](#fonctionnalités)
+2.  [Aperçu du Résultat](#aperçu-du-résultat)
+3.  [Configuration du Projet](#configuration-du-projet)
+    * [Pré-requis](#pré-requis)
+    * [Installation des Dépendances](#installation-des-dépendances)
+    * [Configuration des Accès](#configuration-des-accès)
+4.  [Comment Lancer l'Application](#comment-lancer-lapplication)
+5.  [Structure du Code](#structure-du-code)
+6.  [Auteur](#auteur)
 
-🛠️ Configuration du Projet
-Pré-requis
+---
+
+## ✨ Fonctionnalités
+
+* **Visualisation en Temps Réel** : Les marqueurs de stations sont colorés selon la disponibilité des vélos (Vert pour disponible, Rouge pour vide).
+* **Planification d'Itinéraire (Routage Cyclable)** : Utilisation de l'API **OSRM (Open Source Routing Machine)** pour tracer des chemins précis qui suivent les routes cyclables réelles.
+* **Informations de Navigation** : Affiche la distance totale, la durée estimée du trajet, et des instructions détaillées étape par étape.
+* **Interface Simple** : Une barre latérale fixe gère la sélection des stations de départ et d'arrivée.
+
+---
+
+## 🖼️ Aperçu du Résultat
+
+
+Pour illustrer le fonctionnement de cette application, nous présentons deux vues clés. Les images se trouvent dans le dossier **`VELIB/Image/`**.
+
+### 1. Vue d'Ensemble du Réseau Parisien
+
+Cette image montre la densité des stations et leur statut de disponibilité actuel dans Paris.
+
+| Couleur | Statut | Description |
+|---------|---------|-------------|
+| 🟩 **Vert** | Stock élevé | Vélos disponibles en grand nombre avec un grand nombre de place disponible  |
+| 🟧 **Orange** | Stock modéré | Vélos disponibles mais quantité moyenne avec peu de place disponible |
+| 🟥 **Rouge** | Très faible stock | Très peu de vélos encore disponibles et un nombre de place très restreint |
+
+![Aperçu de toutes les stations Vélib' sur la carte](VELIB/Image/UneStation.png)
+
+### 2. Démonstration de Routage Cyclable
+
+**Cette capture met en évidence la fonctionnalité principale : le planificateur de route.**
+On peut programmer un trajet d'un point A à un point B. Si la station d'arrivée à une **disponiblité quasi nulle**, elle s'affichera en **noir**.
+On retrouve également **la durée estimée du trajet** ainsi que **sa distance à parcourir**
+On a également tout en bas, la liste des instructions de route à suivre pour arriver le plus vite.
+
+![Exemple de tracé de route cyclable avec instructions de navigation](VELIB/Image/Trajet.png)
+
+## 🛠️ Configuration du Projet
+
+### Pré-requis
+
 Pour exécuter ce projet localement, vous devez avoir :
 
-Python 3.8+
+* **Python 3.8+**
+* **MongoDB** installé et en cours d'exécution.
+* **Accès aux données Vélib'** (la base de données est configurée pour `velib_Paris`).
 
-MongoDB installé et en cours d'exécution.
+### Installation des Dépendances
 
-Accès aux données Vélib' (la base de données est configurée pour velib_Paris).
-
-1. Installation des Dépendances
 Installez toutes les bibliothèques requises :
 
-Bash
-
+```bash
 # Installe les dépendances requises
 pip install flask pymongo python-dotenv folium geopy requests polyline
-2. Configuration des Accès
-Ce projet utilise le service de routage public OSRM (gratuit, sans clé API).
-
-Créez un fichier nommé .env (au même niveau que Carte_Velib.py).
-
-Ajoutez votre URI de connexion MongoDB.
-
-Extrait de code
-
-# Fichier .env (NE PAS PUBLIER SUR GITHUB)
-MONGO_URI="mongodb://admin:admin@localhost:27017/?authSource=admin"
-
-# Les clés de routage (ORS_API_KEY) sont ignorées, car nous utilisons OSRM gratuit.
-▶️ Comment Lancer l'Application
-Assurez-vous que votre serveur MongoDB est en cours d'exécution.
-
-Dans votre terminal (avec l'environnement virtuel activé), lancez l'application Flask en utilisant le nom de votre fichier :
-
-Bash
-
-python Carte_Velib.py
-Ouvrez votre navigateur et accédez à : http://127.0.0.1:5000/
-
-🧑‍💻 Structure du Code
-Le cœur de l'application est contenu dans Carte_Velib.py et est structuré autour des fonctions clés de routage et de rendu Flask.
-
-get_osrm_route(start, end) : Contacte le serveur OSRM public pour le routage cyclable. Cette fonction retourne le tracé, la distance, la durée et les instructions détaillées.
-
-generate_velib_map(...) : Construit la carte Folium, place les marqueurs (colorés selon la disponibilité), et trace le chemin routier en utilisant les données de get_osrm_route.
-
-index() : La fonction principale de routage Flask qui gère les requêtes HTTP, maintient l'état du formulaire (sélections de stations), et rend le HTML_TEMPLATE.
