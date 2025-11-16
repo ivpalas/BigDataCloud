@@ -360,7 +360,7 @@ RETURN c, r, n LIMIT 50
 
 Mais ils ne sont pas les seules. Voici le top10 des personnages clés de la série
 
-![TotalConnection](the100/Image/TotalConnection.png)
+![TotalConnection](The100/Image/TotalConnection.png)
 
 | Rang | Personnage | TotalConnections | Rôle Analytique dans le Graphe |
 |----------|-----------|---------------| -------------------------------|
