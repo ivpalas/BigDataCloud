@@ -332,6 +332,8 @@ RETURN c, r, n
 
 ![RelationClarkesGriffin](The100/Image/RelationClarkesGriffin.png)
 
+On peut voir ci-dessous les principaux crimes qui ont été commis dans la série :
+
 ```bash
 MATCH (p:Person)-[r:COMMITTED|RESPONSIBLE_FOR|ORDERED_VIOLATION]->(v:Violation)
 RETURN 
@@ -342,12 +344,10 @@ RETURN
 ORDER BY Gravite DESC, Auteur
 ```
 
-On peut voir ci-dessous les principaux crimes qui ont été commis dans la série :
-
 ![GensCrimes](The100/Image/GensCrime.png)
 
 
-Ici, on peut voir les trois protagonistes de l'histoire :
+Ici, on peut voir toutes les relations de nos trois principaux protagonistes  :
 
 ```bash
 MATCH (c:Person)-[r]-(n)
@@ -360,7 +360,7 @@ RETURN c, r, n LIMIT 50
 
 Mais ils ne sont pas les seules. Voici le top10 des personnages clés de la série
 
-![Protagonistes](the100/Image/TotalConnection.png)
+![TotalConnection](the100/Image/TotalConnection.png)
 
 | Rang | Personnage | TotalConnections | Rôle Analytique dans le Graphe |
 |----------|-----------|---------------| -------------------------------|
